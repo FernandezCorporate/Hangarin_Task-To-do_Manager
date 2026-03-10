@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.utils import timezone
 from faker import Faker
-from ...models import Task, Note, SubTask, Category, Priority
+from Hangarin.models import Task, Note, SubTask, Category, Priority
 
 
 class Command(BaseCommand):

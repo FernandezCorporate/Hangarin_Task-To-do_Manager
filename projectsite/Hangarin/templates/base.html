@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Hangarin App{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body class="overflow-x-hidden">
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="d-flex justify-content-between align-items-center w-100 ms-2">
+        <span class="navbar-brand">Hangarin</span>
+
+        <div class="d-flex align-items-center gap-3">
+          <span class="text-white">Dashboard</span>
+          <button class="btn btn-success">Add Task</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row g-0"> 
+
+      <div class="offcanvas-md offcanvas-start bg-light border-end col-md-2 p-0" 
+           id="sidebar" 
+           style="height: calc(100vh - 56px);">
+
+        <div class="offcanvas-header d-md-none border-bottom">
+          <h5 class="offcanvas-title">Menu</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebar"></button>
+        </div>
+
+        <div class="offcanvas-body p-3 d-flex flex-column h-100">
+          <ul class="nav flex-column w-100 vh-100 d-flex">
+            <div class="mb-4"> 
+              <span class="text-muted small fw-bold">OVERVIEW</span>
+              <li class="nav-item"><a class="nav-link" href="">Dashboard</a></li>
+            </div>
+            <div>
+              <span class="text-muted small fw-bold">TASK</span>
+              <li class="nav-item"><a class="nav-link" href="#">Task List</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Add Task</a></li>
+            </div>
+            <div class="mt-auto border-top p-3 bg-white">
+              <div class="dropup">
+                <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px;">
+                    {{ user.username|slice:":1"|upper|default:"U" }}
+                  </div>
+                  <strong>{{ user.username|default:"Guest" }}</strong>
+                </a>
+
+                <ul class="dropdown-menu shadow-none border-0 w-100 mb-2">
+                  <li><a class="dropdown-item" href="#">Profile</a></li>
+                  <li><a class="dropdown-item" href="#">Settings</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item text-danger" href="#">Logout</a></li>
+                </ul>
+              </div>
+            </div>
+          </ul>
+        </div>
+      </div>
+
+      <main class="col-md-10 ms-sm-auto px-md-4 py-4">
+        {% block content %}
+        {% endblock %}  
+      </main>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
