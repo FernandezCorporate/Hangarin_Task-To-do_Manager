@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Hangarin App{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body class="overflow-x-hidden">
@@ -42,7 +42,7 @@
           <ul class="nav flex-column w-100 vh-100 d-flex">
             <div class="mb-4"> 
               <span class="text-muted small fw-bold">OVERVIEW</span>
-              <li class="nav-item"><a class="nav-link" href="">Dashboard</a></li>
+              <li class="nav-item"><a class="nav-link" href="">{{ model }}</a></li>
             </div>
             <div>
               <span class="text-muted small fw-bold">TASK</span>
