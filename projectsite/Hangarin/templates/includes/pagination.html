@@ -1,0 +1,42 @@
+{% if is_paginated %}
+<div class="card-footer px-0 border-0 d-flex flex-column flex-lg-row align-items-center
+justify-content-end mt-4 mb-0">
+    <nav aria-label="Topics pagination" class="mb-0">
+        <ul class="pagination">
+            {% if page_obj.number > 1 %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1&q={{ request.GET.q }}&sort_by={{ request.GET.sort_by }}&priority={{ request.GET.priority }}&category={{ request.GET.category }}&status={{ request.GET.status }}">First</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">First</span>
+            </li>
+            {% endif %}
+
+            {% for page_num in paginator.page_range %}
+                {% if page_obj.number == page_num %}
+                <li class="page-item active">
+                    <span class="page-link">
+                        {{ page_num }}
+                    </span>
+                </li>
+                {% elif page_num > page_obj.number|add:'-3' and page_num < page_obj.number|add:'3' %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_num }}&q={{ request.GET.q }}&sort_by={{ request.GET.sort_by }}&priority={{ request.GET.priority }}&category={{ request.GET.category }}&status={{ request.GET.status }}">{{ page_num }}</a>
+                </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.number != paginator.num_pages %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ paginator.num_pages }}&q={{ request.GET.q }}&sort_by={{ request.GET.sort_by }}&priority={{ request.GET.priority }}&category={{ request.GET.category }}&status={{ request.GET.status }}">Last</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">Last</span>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endif %}

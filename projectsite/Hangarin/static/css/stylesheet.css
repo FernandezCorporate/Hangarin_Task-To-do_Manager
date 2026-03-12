@@ -1,0 +1,62 @@
+.category{
+    border-right-width: 10px !important;
+}
+
+.responsive-text {
+    font-size: clamp(0.8rem, 1vw + 0.5rem, 1rem);
+}
+
+.table th, .table td {
+    font-size: clamp(0.75rem, 0.8vw + 0.4rem, 0.9rem);
+    vertical-align: middle;
+}
+
+.table-responsive-custom {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.status-pending{
+    background-color: 	rgba(228, 200, 77, 0.3);
+    color: 	#d8ad12 !important;
+}
+
+.status-ongoing{
+    background-color: rgba(79, 79, 218, 0.3);
+    color: rgb(37, 37, 240) !important;
+}
+
+.status-completed{
+    background-color: rgba(50, 215, 69, 0.3);
+    color:rgb(2, 189, 42) !important;
+}
+
+.priority-optional{
+    background-color: rgba(128, 128, 128, 0.3);
+    color: rgb(128, 128, 128) !important;
+}
+
+.priority-critical{
+    background-color: rgba(255, 0, 0, 0.3);
+    color: rgb(255, 0, 0) !important;
+}
+
+.category-purple{
+    color: rgb(220, 5, 220) !important;
+}
+
+.category-red{
+    color: rgb(243, 3, 3);
+}
+
+.category-green{
+    color: rgb(3, 243, 3);
+}
+
+.category-pink{
+    color: rgb(250, 33, 166);
+}
+
+.category-darkPurple{
+    color: rgb(9, 176, 218);
+}

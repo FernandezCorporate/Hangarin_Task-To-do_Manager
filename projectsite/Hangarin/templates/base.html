@@ -7,7 +7,8 @@
     <title>{% block title %}Hangarin App{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/stylesheet.css' %}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-</head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  </head>
 <body class="overflow-x-hidden">
   <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
@@ -19,8 +20,10 @@
         <span class="navbar-brand">Hangarin</span>
 
         <div class="d-flex align-items-center gap-3">
-          <span class="text-white">Dashboard</span>
-          <button class="btn btn-success">Add Task</button>
+          <span class="text-white">{{ model }}</span>
+          <a href="">
+            <button class="btn btn-success">Add Task</button>
+          </a>
         </div>
       </div>
     </div>
@@ -42,11 +45,11 @@
           <ul class="nav flex-column w-100 vh-100 d-flex">
             <div class="mb-4"> 
               <span class="text-muted small fw-bold">OVERVIEW</span>
-              <li class="nav-item"><a class="nav-link" href="">{{ model }}</a></li>
+              <li class="nav-item"><a class="nav-link" href="/">Dashboard</a></li>
             </div>
             <div>
               <span class="text-muted small fw-bold">TASK</span>
-              <li class="nav-item"><a class="nav-link" href="#">Task List</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'taskList' %}">Task List</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Add Task</a></li>
             </div>
             <div class="mt-auto border-top p-3 bg-white">

@@ -3,6 +3,12 @@
 
 {% block content %}
 <div class="container-fluid">
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3">
+        <p class="fw-bold">
+            Statistics and Analytics
+        </p>
+    </div>
   
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5">
     <div class="col">
@@ -47,7 +53,7 @@
 
     <div class="col">
         <div class="card h-100 shadow-sm">
-        <div class="card-body p-4 text-center">
+        <div class="card-body p-4 text-center border border-primary">
             <h6 class="text-primary mb-2">Completion Rate</h6>
             <h2 class="display-5 fw-bold text-primary">{{ Completion_rate }}</h2>
             <small class="text-primary mb-0 small fw-medium">Accomplishment hit percentage</small>
@@ -57,7 +63,7 @@
 
     <div class="col">
         <div class="card h-100 shadow-sm">
-        <div class="card-body p-4 text-center">
+        <div class="card-body p-4 text-center border border-success">
             <h6 class="text-success mb-2">Compliancy Rate</h6>
             <h2 class="display-5 fw-bold text-success">{{ Compliancy_rate }}</h2>
             <small class="text-success mb-0 small fw-medium">Punctuality</small>
@@ -67,7 +73,7 @@
 
     <div class="col">
         <div class="card h-100 shadow-sm">
-        <div class="card-body p-4 text-center">
+        <div class="card-body p-4 text-center border border-danger">
             <h6 class="text-danger mb-2">Deliquency Rate</h6>
             <h2 class="display-5 fw-bold text-danger">{{ Deliquency_rate }}</h2>
             <small class="text-danger mb-0 small fw-medium">Done late</small>
@@ -77,95 +83,100 @@
 
     </div>
 
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3">
+        <p class="fw-bold">
+            Task Summary
+        </p>
+    </div>
 
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 g-3">
         <div class="col">
-            <div class="card h-100 border-0 border-start border-secondary border-5 shadow-sm bg-light">
-            <div class="card-body text-center d-flex flex-column justify-content-center p-2">
+            <div class="card h-100 text-white shadow-sm bg-light">
+            <div class="bg-secondary card-body text-center d-flex flex-column justify-content-center p-2">
                 <h4 class="fw-bold mb-0">{{ optional }}</h4>
 
-                <p class="text-muted mb-0" style="font-size: 0.75rem;">Optional priority</p>
+                <p class="text-white mb-0" style="font-size: 0.75rem;">Optional priority</p>
             </div>
             </div>
         </div>
 
         <div class="col">
-            <div class="card h-100 border-0 border-start border-success border-5 shadow-sm bg-light">
-            <div class="card-body text-center d-flex flex-column justify-content-center p-2">
+            <div class="card h-100 text-white shadow-sm bg-light">
+            <div class="bg-success card-body text-center d-flex flex-column justify-content-center p-2">
                 <h4 class="fw-bold mb-0">{{ low }}</h4>
-                <p class="text-muted mb-0" style="font-size: 0.75rem;">Low priority</p>
+                <p class="text-white mb-0" style="font-size: 0.75rem;">Low priority</p>
             </div>
             </div>
         </div>
 
         <div class="col">
-            <div class="card h-100 border-0 border-start border-info border-5 shadow-sm bg-light">
-            <div class="card-body text-center d-flex flex-column justify-content-center p-2">
+            <div class="card h-100 text-white shadow-sm bg-light">
+            <div class="bg-primary card-body text-center d-flex flex-column justify-content-center p-2">
                 <h4 class="fw-bold mb-0">{{ medium }}</h4>
-                <p class="text-muted mb-0" style="font-size: 0.75rem;">Medium priority</p>
+                <p class="text-white mb-0" style="font-size: 0.75rem;">Medium priority</p>
             </div>
             </div>
         </div>
 
         <div class="col">
-            <div class="card h-100 border-0 border-start border-warning border-5 shadow-sm bg-light">
-            <div class="card-body text-center d-flex flex-column justify-content-center p-2">
+            <div class="card h-100 text-white shadow-sm bg-light">
+            <div class="bg-warning card-body text-center d-flex flex-column justify-content-center p-2">
                 <h4 class="fw-bold mb-0">{{ high }}</h4>
-                <p class="text-muted mb-0" style="font-size: 0.75rem;">High priority</p>
+                <p class="text-white mb-0" style="font-size: 0.75rem;">High priority</p>
             </div>
             </div>
         </div>
 
         <div class="col">
-            <div class="card h-100 border-0 border-start border-danger border-5 shadow-sm bg-light">
-            <div class="card-body text-center d-flex flex-column justify-content-center p-2">
+            <div class="card h-100 text-white shadow-sm bg-light">
+            <div class="bg-danger card-body text-center d-flex flex-column justify-content-center p-2">
                 <h4 class="fw-bold mb-0">{{ critical }}</h4>
-                <p class="text-muted mb-0" style="font-size: 0.75rem;">Critical priority</p>
+                <p class="text-white mb-0" style="font-size: 0.75rem;">Critical priority</p>
             </div>
             </div>
         </div>
 
         <div class="col">
-            <div class="card h-100 text-primary border-primary shadow-sm bg-light">
+            <div class="card h-100 border-top border-bottom category text-primary border-primary shadow-sm bg-light">
             <div class="card-body text-center d-flex flex-column justify-content-center p-2">
                 <h4 class="fw-bold mb-0">{{ work }}</h4>
-                <p class="mb-0" style="font-size: 0.75rem;">Work tasks</p>
+                <p class="text-muted mb-0" style="font-size: 0.75rem;">Work tasks</p>
             </div>
             </div>
         </div>
 
         <div class="col">
-            <div class="card h-100 text-info border-info shadow-sm bg-light">
+            <div class="card h-100 border-top border-bottom category text-info border-info shadow-sm bg-light">
             <div class="card-body text-center d-flex flex-column justify-content-center p-2">
                 <h4 class="fw-bold mb-0">{{ project }}</h4>
-                <p class="mb-0" style="font-size: 0.75rem;">Project tasks</p>
+                <p class="text-muted mb-0" style="font-size: 0.75rem;">Project tasks</p>
             </div>
             </div>
         </div>
 
         <div class="col">
-            <div class="card h-100 text-danger border-danger shadow-sm bg-light">
+            <div class="card h-100 border-top border-bottom category text-danger border-danger shadow-sm bg-light">
             <div class="card-body text-center d-flex flex-column justify-content-center p-2">
                 <h4 class="fw-bold mb-0">{{ school }}</h4>
-                <p class="mb-0" style="font-size: 0.75rem;">School tasks</p>
+                <p class="text-muted mb-0" style="font-size: 0.75rem;">School tasks</p>
             </div>
             </div>
         </div>
 
         <div class="col">
-            <div class="card h-100 text-warning border-warning shadow-sm bg-light">
+            <div class="card h-100 border-top border-bottom category text-warning border-warning shadow-sm bg-light">
             <div class="card-body text-center d-flex flex-column justify-content-center p-2">
                 <h4 class="fw-bold mb-0">{{ personal }}</h4>
-                <p class="mb-0" style="font-size: 0.75rem;">Personal tasks</p>
+                <p class="text-muted mb-0" style="font-size: 0.75rem;">Personal tasks</p>
             </div>
             </div>
         </div>
 
         <div class="col">
-            <div class="card h-100 text-success border border-success shadow-sm bg-light">
+            <div class="card h-100 border-top border-bottom category text-success border-success shadow-sm bg-light">
             <div class="card-body text-center d-flex flex-column justify-content-center p-2">
                 <h4 class="fw-bold mb-0">{{ finance }}</h4>
-                <p class="mb-0" style="font-size: 0.75rem;">Finance tasks</p>
+                <p class="text-muted mb-0" style="font-size: 0.75rem;">Finance tasks</p>
             </div>
             </div>
         </div>

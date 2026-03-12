@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid py-3">
+    <div class="card p-3 shadow-sm border-top border-bottom border-start border-primary">
+        <form action="" method="get">
+            <div class="row g-3 align-items-end">
+                <div class="col-12 col-lg-5">
+                    <label for="searchbar" class="fw-bold mb-1 small">Search <i class="bi bi-search"></i></label>
+                    <input type="text" name="q" class="form-control border-secondary form-control-sm" id="searchbar" placeholder="Type to search...">
+                </div>
+
+                <div class="col-12 col-lg-7">
+                    <div class="row g-2 align-items-end justify-content-end">
+                        <div class="col-6 col-md-3">
+                            <label for="status" class="small fw-bold">Status</label>
+                            <select name="status" id="status" class="form-select form-select-sm border-secondary">
+                                <option value="">All Status</option>
+                                <option value="pending">Pending</option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <label for="priority" class="small fw-bold">Priority</label>
+                            <select name="priority" id="priority" class="form-select form-select-sm border-secondary">
+                                <option value="">All Priorities</option>
+                                <option value="low">Low</option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <label for="category" class="small fw-bold">Category</label>
+                            <select name="category" id="category" class="form-select form-select-sm border-secondary">
+                                <option value="">All Categories</option>
+                                <option value="work">Work</option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <button type="submit" class="btn btn-primary btn-sm w-100">Filter</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="card p-3 mt-4 shadow-sm border-top border-bottom border-start border-primary">
+        <div class="row">
+            <div class="col-12">
+                <p class="fw-bold fs-5 fs-sm-6">All Tasks</p>
+            </div>
+            <div class="table-responsive-custom">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Priority</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Due Date</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for object in object_list %}
+                        <tr>
+                            <td class="text-truncate" style="max-width: 150px;">{{ object.title }}</td>
+                            <td><span class="badge rounded-pill
+                                    {% if object.status == 'Pending' %}status-pending
+                                    {% elif object.status == 'In Progress ' %}status-ongoing
+                                    {% elif object.status == 'Completed' %}status-completed
+                                    {% endif %}" style="font-size: 0.7rem;">{{ object.status }}</span></td>
+                            <td><span class="badge
+                                    {% if object.priority.name == 'Low' %}status-completed
+                                    {% elif object.priority.name == 'Medium' %}status-ongoing
+                                    {% elif object.priority.name == 'High' %}status-pending
+                                    {% elif object.priority.name == 'Optional' %}priority-optional
+                                    {% elif object.priority.name == 'Critical' %}priority-critical
+                                    {% endif %}" style="font-size: 0.7rem;">
+                                {{ object.priority }}
+                            </span></td>
+                            <td><span class="fw-bold
+                                    {% if object.category.name == 'School' %}category-purple
+                                    {% elif object.category.name == 'Projects' %}category-red
+                                    {% elif object.category.name == 'Personal' %}category-pink
+                                    {% elif object.category.name == 'Work' %}category-darkPurple
+                                    {% elif object.category.name == 'Finance' %}category-green
+                                    {% endif %}">
+                            {{ object.category }}</span></td>
+                            <td class="text-nowrap">{{ object.deadline }}</td>
+                            <td class="text-nowrap">
+                                <div class="d-flex gap-2">
+                                    <a href="#" class="btn btn-sm btn-outline-info" title="View">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-outline-primary" title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-sm btn-outline-danger" title="Delete">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-4">No tasks found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {% include 'includes/pagination.html' %}
+</div>
+{% endblock %}

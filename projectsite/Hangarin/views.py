@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic.list import ListView
 from Hangarin.models import Task
 from django.db.models import F
+
 class DashBoardListView(ListView):
     model = Task
     template_name = "dashboard.html"
@@ -85,5 +86,18 @@ class DashBoardListView(ListView):
         context["project"] = project
         context["finance"] = finance
         context["school"] = school
+
+        return context
+    
+class TaskListView(ListView):
+    model = Task
+    template_name = 'taskList.html'
+    context_object_name = 'taskList'
+    paginate_by = 7
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["model"] = "Tasks"
 
         return context

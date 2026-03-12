@@ -16,10 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Hangarin.views import DashBoardListView
+from Hangarin.views import DashBoardListView, TaskListView
 from Hangarin import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', DashBoardListView.as_view(), name='dashboard'),
+    path('taskList', views.TaskListView.as_view(), name='taskList'),
 ]
