@@ -5,7 +5,7 @@ from Hangarin.models import Task, SubTask
 from django.db.models import F
 from Hangarin.forms import TaskForm, SubTaskForm
 from django.urls import reverse_lazy
-from extra_views import CreateWithInlinesView, InlineFormSetFactory
+from extra_views import CreateWithInlinesView, InlineFormSetFactory, UpdateWithInlinesView
 
 class DashBoardListView(ListView):
     model = Task
@@ -111,6 +111,11 @@ class SubTaskInline(InlineFormSetFactory):
     form_class = SubTaskForm
     factory_kwargs = {'extra': 3, 'max_num': 5, 'can_delete': False} 
 
+class SubTaskUpdateInline(InlineFormSetFactory):
+    model = SubTask
+    form_class = SubTaskForm
+    factory_kwargs = {'extra': 0, 'can_delete': False}
+
 class TaskCreateView(CreateWithInlinesView):
     model = Task
     template_name = 'taskForm.html'
@@ -118,3 +123,9 @@ class TaskCreateView(CreateWithInlinesView):
     success_url = reverse_lazy('taskList')
     inlines = [SubTaskInline]
 
+class TaskUpdateView(UpdateWithInlinesView):
+    model = Task
+    template_name = 'taskForm.html'
+    form_class = TaskForm
+    success_url = reverse_lazy('taskList')
+    inlines = [SubTaskUpdateInline]
