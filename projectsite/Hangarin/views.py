@@ -129,3 +129,8 @@ class TaskUpdateView(UpdateWithInlinesView):
     form_class = TaskForm
     success_url = reverse_lazy('taskList')
     inlines = [SubTaskUpdateInline]
+
+class TaskDeleteView(DeleteView):
+    model = Task
+    template_name = 'taskConfirmDelete.html'
+    success_url = reverse_lazy('taskList')

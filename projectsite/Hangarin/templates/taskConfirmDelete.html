@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Confirm Delete{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="card shadow-sm border-primary">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Confirm Delete</h5>
+        </div>
+        <div class="card-body">
+            <p class="mb-4">Are you sure you want to delete the task "<strong>{{ object.title }}</strong>"?</p>
+            <form method="POST">
+                {% csrf_token %}
+                <a href="{% url 'taskList' %}" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

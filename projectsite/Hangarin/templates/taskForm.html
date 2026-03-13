@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Create Task{% endblock %}
+{% block title %}
+    {% if object %}Edit Task{% else %}Create Task{% endif %}
+{% endblock %}
 
 {% block content %}
 <div class="container-fluid">
@@ -9,7 +11,7 @@
         <div class="col-12 scroll-column p-3">
             <div class="card shadow-sm border-primary">
                 <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Create Task</h5>
+                    <h5 class="mb-0">{% if object %}Edit Task{% else %}Create Task{% endif %}</h5>
                 </div>
                 <div class="card-body">
                     <form method="POST">
