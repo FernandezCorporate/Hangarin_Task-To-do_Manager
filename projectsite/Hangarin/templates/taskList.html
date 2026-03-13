@@ -10,7 +10,7 @@
             <div class="row g-3 align-items-end">
                 <div class="col-12 col-lg-5">
                     <label for="searchbar" class="fw-bold mb-1 small">Search <i class="bi bi-search"></i></label>
-                    <input type="text" name="q" class="form-control border-secondary form-control-sm" id="searchbar" placeholder="Type to search...">
+                    <input type="text" name="q" value="{{ request.GET.q }}" class="form-control border-secondary form-control-sm" id="searchbar" placeholder="Type to search...">
                 </div>
 
                 <div class="col-12 col-lg-7">
@@ -19,21 +19,31 @@
                             <label for="status" class="small fw-bold">Status</label>
                             <select name="status" id="status" class="form-select form-select-sm border-secondary">
                                 <option value="">All Status</option>
-                                <option value="pending">Pending</option>
+                                <option value="Pending" {% if request.GET.status == "Pending" %}selected{% endif %}>Pending</option>
+                                <option value="In Progress " {% if request.GET.status == "In Progress " %}selected{% endif %}>In Progress</option>
+                                <option value="Completed" {% if request.GET.status == "Completed" %}selected{% endif %}>Completed</option>
                             </select>
                         </div>
                         <div class="col-6 col-md-3">
                             <label for="priority" class="small fw-bold">Priority</label>
                             <select name="priority" id="priority" class="form-select form-select-sm border-secondary">
                                 <option value="">All Priorities</option>
-                                <option value="low">Low</option>
+                                <option value="Low" {% if request.GET.priority == "Low" %}selected{% endif %}>Low</option>
+                                <option value="Medium" {% if request.GET.priority == "Medium" %}selected{% endif %}>Medium</option>
+                                <option value="High" {% if request.GET.priority == "High" %}selected{% endif %}>High</option>
+                                <option value="Optional" {% if request.GET.priority == "Optional" %}selected{% endif %}>Optional</option>
+                                <option value="Critical">Critical</option>
                             </select>
                         </div>
                         <div class="col-6 col-md-3">
                             <label for="category" class="small fw-bold">Category</label>
                             <select name="category" id="category" class="form-select form-select-sm border-secondary">
                                 <option value="">All Categories</option>
-                                <option value="work">Work</option>
+                                <option value="work" {% if request.GET.category == "work" %}selected{% endif %}>Work</option>
+                                <option value="school" {% if request.GET.category == "school" %}selected{% endif %}>School</option>
+                                <option value="personal" {% if request.GET.category == "personal" %}selected{% endif %}>Personal</option>
+                                <option value="projects" {% if request.GET.category == "projects" %}selected{% endif %}>Projects</option>
+                                <option value="finance" {% if request.GET.category == "finance" %}selected{% endif %}>Finance</option>
                             </select>
                         </div>
                         <div class="col-6 col-md-3">

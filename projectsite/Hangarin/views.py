@@ -99,6 +99,28 @@ class TaskListView(ListView):
     context_object_name = 'taskList'
     paginate_by = 7
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        
+        query = self.request.GET.get('q')
+        p_val = self.request.GET.get('priority')
+        c_val = self.request.GET.get('category')
+        s_val = self.request.GET.get('status')
+
+        if query:
+            qs = qs.filter(title__icontains=query)
+
+        if p_val and p_val != "All":
+            qs = qs.filter(priority__name__iexact=p_val)
+
+        if c_val and c_val != "All":
+            qs = qs.filter(category__name__iexact=c_val)
+
+        if s_val and s_val != "All":
+            qs = qs.filter(status__iexact=s_val)
+
+        return qs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
