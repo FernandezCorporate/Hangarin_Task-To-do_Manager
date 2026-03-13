@@ -46,19 +46,19 @@
 }
 
 .category-red{
-    color: rgb(243, 3, 3);
+    color: rgb(243, 3, 3) !important;
 }
 
 .category-green{
-    color: rgb(3, 243, 3);
+    color: rgb(3, 243, 3) !important;
 }
 
 .category-pink{
-    color: rgb(250, 33, 166);
+    color: rgb(250, 33, 166) !important;
 }
 
 .category-darkPurple{
-    color: rgb(9, 176, 218);
+    color: rgb(9, 176, 218) !important;
 }
 
 .scroll-column {
@@ -87,4 +87,24 @@
     body{
         overflow-y: hidden;
     }
+}
+
+.category-bg-purple{
+    background-color: rgb(220, 5, 220) !important;
+}
+
+.category-bg-red{
+    background-color: rgb(243, 3, 3);
+}
+
+.category-bg-green{
+    background-color: rgb(3, 243, 3);
+}
+
+.category-bg-pink{
+    background-color: rgb(250, 33, 166);
+}
+
+.category-bg-darkPurple{
+    background-color: rgb(9, 176, 218);
 }

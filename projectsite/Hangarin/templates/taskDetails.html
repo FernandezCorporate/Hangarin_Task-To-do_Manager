@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Task Details{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-3 px-3">
+    <div class="row">
+        <div class="col-12">
+            <div class="fw-bold fs-1">{{ taskDetails.title }}</div>
+        </div>
+    </div>
+    <div class="row gx-2">
+        <div class="col-auto">
+            <span class="badge rounded-pill
+                {% if taskDetails.status == 'Pending' %}status-pending
+                {% elif taskDetails.status == 'In Progress ' %}status-ongoing
+                {% elif taskDetails.status == 'Completed' %}status-completed
+                {% endif %}" style="font-size: 0.7rem;">{{ taskDetails.status }}</span>
+        </div>
+        <div class="col-auto">
+            <span class="badge
+                {% if taskDetails.priority.name == 'Low' %}status-completed
+                {% elif taskDetails.priority.name == 'Medium' %}status-ongoing
+                {% elif taskDetails.priority.name == 'High' %}status-pending
+                {% elif taskDetails.priority.name == 'Optional' %}priority-optional
+                {% elif taskDetails.priority.name == 'Critical' %}priority-critical
+                {% endif %}" style="font-size: 0.7rem;">{{ taskDetails.priority }}</span>
+        </div>
+        <div class="col-auto">
+            <span class="badge
+                {% if taskDetails.category.name == 'School' %}category-bg-purple
+                {% elif taskDetails.category.name == 'Projects' %}category-bg-red
+                {% elif taskDetails.category.name == 'Personal' %}category-bg-pink
+                {% elif taskDetails.category.name == 'Work' %}category-bg-darkPurple
+                {% elif taskDetails.category.name == 'Finance' %}category-bg-green
+                {% endif %}" style="font-size: 0.7rem;">{{ taskDetails.category }}</span>
+        </div>
+        <div class="col-auto">
+            <span class="badge bg-light text-muted rounded-pill border" style="font-size: 0.7rem;">
+                Due {{ taskDetails.deadline|date:"M d, Y" }}
+            </span>
+        </div>
+        <div class="col-auto">
+            <span class="badge bg-light text-muted rounded-pill border" style="font-size: 0.7rem;">
+                Created {{ taskDetails.created_at|date:"M d, Y" }}
+            </span>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12 col-lg-8">
+            <div class="card border-primary">
+                <div class="card-header bg-primary fw-bold text-white fs-5">Description</div>
+                <div class="card-body">{{ taskDetails.description }}</div>
+            </div>
+
+            <div class="card border-primary mt-4">
+                <div class="card-header bg-primary d-flex justify-content-between">
+                    <span class="fw-bold text-white fs-5">Subtasks</span>
+                    <a href="#">
+                        <div class="btn btn-success">Add Subtask</div>
+                    </a>
+                </div>
+                <div class="card-body overflow-auto" style="max-height: 40vh;">
+                    {% for subtask in taskDetails.subtask_set.all %}
+                    <div class="d-flex align-items-center justify-content-between mb-3 p-3 border border-primary rounded">
+                        <div>
+                            <span class="fw-bold">{{ subtask.title }}</span>
+                        </div>
+                        <div>
+                            <span class="badge rounded-pill
+                                {% if subtask.status == 'Pending' %}status-pending
+                                {% elif subtask.status == 'In Progress ' %}status-ongoing
+                                {% elif subtask.status == 'Completed' %}status-completed
+                                {% endif %}" style="font-size: 0.7rem;">{{ subtask.status }}</span>
+                            <a href="#" class="btn btn-sm btn-outline-primary" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="#" class="btn btn-sm btn-outline-danger" title="Delete">
+                                <i class="bi bi-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-4">
+            <div class="card border-primary">
+                <div class="card-header bg-primary d-flex justify-content-between">
+                    <span class="fw-bold text-white fs-5">Notes</span>
+                    <a href="#">
+                        <div class="btn btn-success">Add Note</div>
+                    </a>
+                </div>
+                <div class="card-body overflow-auto" style="max-height: 40vh;">
+                    {% for note in taskDetails.note_set.all %}
+                        <div class="card p-3 mb-2">
+                            <div class="card-body p-0 border-primary">
+                                <div>{{ note.content }}</div>
+                                <div class="d-flex justify-content-between align-items-end">
+                                    <div class="text-muted small">{{ note.created_at|date:"M d, Y" }}</div>
+                                    <div class="d-flex gap-2">
+                                        <a href="" class="btn btn-sm btn-outline-primary" title="Edit">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <a href="" class="btn btn-sm btn-outline-danger" title="Delete">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+<!--
+        {% for note in taskDetails.note_set.all %}
+            <p>{{ note.content }}</p>
+        {% endfor %}
+-->

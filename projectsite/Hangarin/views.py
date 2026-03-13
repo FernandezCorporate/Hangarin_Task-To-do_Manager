@@ -1,7 +1,8 @@
 from django.shortcuts import render
+from django.views.generic import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from Hangarin.models import Task, SubTask
+from Hangarin.models import Task, SubTask, Note
 from django.db.models import F
 from Hangarin.forms import TaskForm, SubTaskForm
 from django.urls import reverse_lazy
@@ -156,3 +157,17 @@ class TaskDeleteView(DeleteView):
     model = Task
     template_name = 'taskConfirmDelete.html'
     success_url = reverse_lazy('taskList')
+
+class TaskDetailListView(DetailView):
+    model = Task
+    template_name = 'taskDetails.html'
+    context_object_name = 'taskDetails'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["details_active"] = True
+        
+        return context
+
+    def get_queryset(self):
+        return Task.objects.prefetch_related('subtask_set', 'note_set').all()

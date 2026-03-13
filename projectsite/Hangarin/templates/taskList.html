@@ -101,7 +101,7 @@
                             <td class="text-nowrap">{{ object.deadline }}</td>
                             <td class="text-nowrap">
                                 <div class="d-flex gap-2">
-                                    <a href="#" class="btn btn-sm btn-outline-info" title="View">
+                                    <a href="{% url 'taskDetails' object.pk %}" class="btn btn-sm btn-outline-info" title="View">
                                         <i class="bi bi-eye"></i>
                                     </a>
                                     <a href="{% url 'taskUpdate' object.pk %}" class="btn btn-sm btn-outline-primary" title="Edit">

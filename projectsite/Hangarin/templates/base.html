@@ -24,6 +24,14 @@
           <a href="{% url 'taskCreate' %}">
             <button class="btn btn-success">Add Task</button>
           </a>
+          {% if details_active %}
+            <a href="{% url 'taskUpdate' taskDetails.pk %}">
+              <button class="btn btn-primary">Edit</button>
+            </a>
+            <a href="{% url 'taskDelete' taskDetails.pk %}">
+              <button class="btn btn-danger">Delete</button>
+            </a>
+          {% endif %}
         </div>
       </div>
     </div>
