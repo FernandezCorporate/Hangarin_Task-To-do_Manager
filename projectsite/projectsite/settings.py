@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "Hangarin",
     'widget_tweaks',
+    'extra_views'
 ]
 
 MIDDLEWARE = [

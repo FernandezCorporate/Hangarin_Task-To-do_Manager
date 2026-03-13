@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
-from Hangarin.models import Task
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from Hangarin.models import Task, SubTask
 from django.db.models import F
+from Hangarin.forms import TaskForm, SubTaskForm
+from django.urls import reverse_lazy
+from extra_views import CreateWithInlinesView, InlineFormSetFactory
 
 class DashBoardListView(ListView):
     model = Task
@@ -101,3 +105,16 @@ class TaskListView(ListView):
         context["model"] = "Tasks"
 
         return context
+
+class SubTaskInline(InlineFormSetFactory):
+    model = SubTask
+    form_class = SubTaskForm
+    factory_kwargs = {'extra': 3, 'max_num': 5, 'can_delete': False} 
+
+class TaskCreateView(CreateWithInlinesView):
+    model = Task
+    template_name = 'taskForm.html'
+    form_class = TaskForm
+    success_url = reverse_lazy('taskList')
+    inlines = [SubTaskInline]
+

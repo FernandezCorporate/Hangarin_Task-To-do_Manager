@@ -60,3 +60,31 @@
 .category-darkPurple{
     color: rgb(9, 176, 218);
 }
+
+.scroll-column {
+    height: calc(100vh - 56px);
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.fixed-column {
+    height: calc(100vh - 56px);
+    overflow: hidden;
+}
+
+@media (max-width: 991px) {
+    .scroll-column {
+        height: auto;
+        overflow: visible;
+    }
+    .fixed-column {
+        position: relative;
+        height: auto;
+    }
+}
+
+@media (min-width: 992px) {
+    body{
+        overflow-y: hidden;
+    }
+}
