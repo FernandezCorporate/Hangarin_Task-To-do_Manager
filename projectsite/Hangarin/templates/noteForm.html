@@ -21,12 +21,12 @@
                         <div class="row g-3">
                             <div class="col-6">
                                 <div class="form-label">Parent Task</div>
-                                <input type="text" class="form-control" value="{% if object %}{{ object.parent_task.title }}{% else %}{{ parent_task.title }}{% endif %}" readonly>
+                                <input type="text" class="form-control" value="{% if object %}{{ object.task.title }}{% else %}{{ parent_task.title }}{% endif %}" readonly>
                             </div>
 
                             <div class="col-6">
                                 <div class="form-label">Parent ID</div>
-                                <input type="text" class="form-control" name="task" value="{% if object %}{{ object.parent_task.pk }}{% else %}{{ parent_task.pk }}{% endif %}" readonly>
+                                <input type="text" class="form-control" name="task" value="{% if object %}{{ object.task.pk }}{% else %}{{ parent_task.pk }}{% endif %}" readonly>
                             </div>
 
                             <div class="col-12">
@@ -36,7 +36,7 @@
                         </div>
                         <div class="mt-4 d-flex justify-content-end">
                             <button type="submit" class="btn btn-success px-4">
-                                Save Task
+                                Submit
                             </button>
                         </div>
 

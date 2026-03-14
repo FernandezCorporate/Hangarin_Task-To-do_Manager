@@ -102,7 +102,7 @@
                                 <div class="d-flex justify-content-between align-items-end">
                                     <div class="text-muted small">{{ note.created_at|date:"M d, Y" }}</div>
                                     <div class="d-flex gap-2">
-                                        <a href="" class="btn btn-sm btn-outline-primary" title="Edit">
+                                        <a href="{% url 'noteUpdate' taskDetails.pk note.pk %}" class="btn btn-sm btn-outline-primary" title="Edit">
                                             <i class="bi bi-pencil"></i>
                                         </a>
                                         <a href="" class="btn btn-sm btn-outline-danger" title="Delete">
@@ -118,9 +118,3 @@
         </div>
     </div>
 {% endblock %}
-
-<!--
-        {% for note in taskDetails.note_set.all %}
-            <p>{{ note.content }}</p>
-        {% endfor %}
--->
