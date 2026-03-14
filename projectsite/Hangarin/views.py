@@ -130,6 +130,26 @@ class TaskListView(ListView):
 
         return context
 
+    def get_ordering(self):
+        allowed = [
+            "title", 
+            "-title", 
+            "deadline", 
+            "-deadline", 
+            "priority__name", 
+            "-priority__name", 
+            "status", 
+            "-status", 
+            "created_at", 
+            "-created_at", 
+            "category__name",
+            "-category__name"
+            ]
+        ordering = self.request.GET.get('sort_by',)
+        if ordering in allowed:
+            return ordering
+        return "created_at"
+
 class SubTaskInline(InlineFormSetFactory):
     model = SubTask
     form_class = SubTaskForm

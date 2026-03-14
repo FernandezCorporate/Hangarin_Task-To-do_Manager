@@ -5,125 +5,186 @@
 
 {% block content %}
 <div class="container-fluid py-3">
+
+    <form action="" method="get">
+
     <div class="card p-3 shadow-sm border-top border-bottom border-start border-primary">
-        <form action="" method="get">
-            <div class="row g-3 align-items-end">
-                <div class="col-12 col-lg-5">
-                    <label for="searchbar" class="fw-bold mb-1 small">Search <i class="bi bi-search"></i></label>
-                    <input type="text" name="q" value="{{ request.GET.q }}" class="form-control border-secondary form-control-sm" id="searchbar" placeholder="Type to search...">
-                </div>
+        <div class="row g-3 align-items-end">
 
-                <div class="col-12 col-lg-7">
-                    <div class="row g-2 align-items-end justify-content-end">
-                        <div class="col-6 col-md-3">
-                            <label for="status" class="small fw-bold">Status</label>
-                            <select name="status" id="status" class="form-select form-select-sm border-secondary">
-                                <option value="">All Status</option>
-                                <option value="Pending" {% if request.GET.status == "Pending" %}selected{% endif %}>Pending</option>
-                                <option value="In Progress " {% if request.GET.status == "In Progress " %}selected{% endif %}>In Progress</option>
-                                <option value="Completed" {% if request.GET.status == "Completed" %}selected{% endif %}>Completed</option>
-                            </select>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <label for="priority" class="small fw-bold">Priority</label>
-                            <select name="priority" id="priority" class="form-select form-select-sm border-secondary">
-                                <option value="">All Priorities</option>
-                                <option value="Low" {% if request.GET.priority == "Low" %}selected{% endif %}>Low</option>
-                                <option value="Medium" {% if request.GET.priority == "Medium" %}selected{% endif %}>Medium</option>
-                                <option value="High" {% if request.GET.priority == "High" %}selected{% endif %}>High</option>
-                                <option value="Optional" {% if request.GET.priority == "Optional" %}selected{% endif %}>Optional</option>
-                                <option value="Critical">Critical</option>
-                            </select>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <label for="category" class="small fw-bold">Category</label>
-                            <select name="category" id="category" class="form-select form-select-sm border-secondary">
-                                <option value="">All Categories</option>
-                                <option value="work" {% if request.GET.category == "work" %}selected{% endif %}>Work</option>
-                                <option value="school" {% if request.GET.category == "school" %}selected{% endif %}>School</option>
-                                <option value="personal" {% if request.GET.category == "personal" %}selected{% endif %}>Personal</option>
-                                <option value="projects" {% if request.GET.category == "projects" %}selected{% endif %}>Projects</option>
-                                <option value="finance" {% if request.GET.category == "finance" %}selected{% endif %}>Finance</option>
-                            </select>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <button type="submit" class="btn btn-primary btn-sm w-100">Filter</button>
-                        </div>
+            <div class="col-12 col-lg-5">
+                <label for="searchbar" class="fw-bold mb-1 small">Search <i class="bi bi-search"></i></label>
+                <input type="text" name="q" value="{{ request.GET.q }}" class="form-control border-secondary form-control-sm" id="searchbar" placeholder="Type to search...">
+            </div>
+
+            <div class="col-12 col-lg-7">
+                <div class="row g-2 align-items-end justify-content-end">
+
+                    <div class="col-6 col-md-3">
+                        <label for="status" class="small fw-bold">Status</label>
+                        <select name="status" id="status" class="form-select form-select-sm border-secondary">
+                            <option value="">All Status</option>
+                            <option value="Pending" {% if request.GET.status == "Pending" %}selected{% endif %}>Pending</option>
+                            <option value="In Progress " {% if request.GET.status == "In Progress " %}selected{% endif %}>In Progress</option>
+                            <option value="Completed" {% if request.GET.status == "Completed" %}selected{% endif %}>Completed</option>
+                        </select>
                     </div>
+
+                    <div class="col-6 col-md-3">
+                        <label for="priority" class="small fw-bold">Priority</label>
+                        <select name="priority" id="priority" class="form-select form-select-sm border-secondary">
+                            <option value="">All Priorities</option>
+                            <option value="Low" {% if request.GET.priority == "Low" %}selected{% endif %}>Low</option>
+                            <option value="Medium" {% if request.GET.priority == "Medium" %}selected{% endif %}>Medium</option>
+                            <option value="High" {% if request.GET.priority == "High" %}selected{% endif %}>High</option>
+                            <option value="Optional" {% if request.GET.priority == "Optional" %}selected{% endif %}>Optional</option>
+                            <option value="Critical" {% if request.GET.priority == "Critical" %}selected{% endif %}>Critical</option>
+                        </select>
+                    </div>
+
+                    <div class="col-6 col-md-3">
+                        <label for="category" class="small fw-bold">Category</label>
+                        <select name="category" id="category" class="form-select form-select-sm border-secondary">
+                            <option value="">All Categories</option>
+                            <option value="work" {% if request.GET.category == "work" %}selected{% endif %}>Work</option>
+                            <option value="school" {% if request.GET.category == "school" %}selected{% endif %}>School</option>
+                            <option value="personal" {% if request.GET.category == "personal" %}selected{% endif %}>Personal</option>
+                            <option value="projects" {% if request.GET.category == "projects" %}selected{% endif %}>Projects</option>
+                            <option value="finance" {% if request.GET.category == "finance" %}selected{% endif %}>Finance</option>
+                        </select>
+                    </div>
+
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary btn-sm w-100">Filter</button>
+                    </div>
+
                 </div>
             </div>
-        </form>
-    </div>
 
-    <div class="card p-3 mt-4 shadow-sm border-top border-bottom border-start border-primary">
-        <div class="row">
-            <div class="col-12">
-                <p class="fw-bold fs-5 fs-sm-6">All Tasks ({{ All_tasks }})</p>
-            </div>
-            <div class="table-responsive-custom">
-                <table class="table table-hover mb-0">
-                    <thead>
-                        <tr>
-                            <th scope="col">Title</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Priority</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Due Date</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for object in object_list %}
-                        <tr>
-                            <td class="text-truncate" style="max-width: 150px;">{{ object.title }}</td>
-                            <td><span class="badge rounded-pill
-                                    {% if object.status == 'Pending' %}status-pending
-                                    {% elif object.status == 'In Progress ' %}status-ongoing
-                                    {% elif object.status == 'Completed' %}status-completed
-                                    {% endif %}" style="font-size: 0.7rem;">{{ object.status }}</span></td>
-                            <td><span class="badge
-                                    {% if object.priority.name == 'Low' %}status-completed
-                                    {% elif object.priority.name == 'Medium' %}status-ongoing
-                                    {% elif object.priority.name == 'High' %}status-pending
-                                    {% elif object.priority.name == 'Optional' %}priority-optional
-                                    {% elif object.priority.name == 'Critical' %}priority-critical
-                                    {% endif %}" style="font-size: 0.7rem;">
-                                {{ object.priority }}
-                            </span></td>
-                            <td><span class="badge fw-bold text-white
-                                    {% if object.category.name == 'School' %}category-bg-purple
-                                    {% elif object.category.name == 'Projects' %}category-bg-red
-                                    {% elif object.category.name == 'Personal' %}category-bg-pink
-                                    {% elif object.category.name == 'Work' %}category-bg-darkPurple
-                                    {% elif object.category.name == 'Finance' %}category-bg-green
-                                    {% endif %}">
-                            {{ object.category }}</span></td>
-                            <td class="text-nowrap">{{ object.deadline }}</td>
-                            <td class="text-nowrap">
-                                <div class="d-flex gap-2">
-                                    <a href="{% url 'taskDetails' object.pk %}" class="btn btn-sm btn-outline-info" title="View">
-                                        <i class="bi bi-eye"></i>
-                                    </a>
-                                    <a href="{% url 'taskUpdate' object.pk %}" class="btn btn-sm btn-outline-primary" title="Edit">
-                                        <i class="bi bi-pencil"></i>
-                                    </a>
-                                    <a href="{% url 'taskDelete' object.pk %}" class="btn btn-sm btn-outline-danger" title="Delete">
-                                        <i class="bi bi-trash"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="5" class="text-center text-muted py-4">No tasks found.</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
 
-    {% include 'includes/pagination.html' %}
+    <div class="card p-3 mt-4 shadow-sm border-top border-bottom border-start border-primary">
+
+        <div class="row align-items-center mb-3">
+
+            <div class="col-12 col-md-6">
+                <h5 class="fw-bold mb-0">All Tasks ({{ All_tasks }})</h5>
+            </div>
+
+            <div class="col-12 col-md-6 mt-2 mt-md-0 d-flex justify-content-md-end align-items-center gap-2">
+                <label for="sort" class="small fw-bold text-nowrap mb-0">Sort by</label>
+
+                <select name="sort_by" id="sort" class="form-select form-select-sm border-secondary" style="width:auto; min-width:150px;">
+                    <option value="created_at" {% if request.GET.sort_by == "created_at" %}selected{% endif %}>Created Date (Ascending)</option>
+                    <option value="-created_at" {% if request.GET.sort_by == "-created_at" %}selected{% endif %}>Created Date (Descending)</option>
+                    <option value="title" {% if request.GET.sort_by == "title" %}selected{% endif %}>Title (Ascending)</option>
+                    <option value="-title" {% if request.GET.sort_by == "-title" %}selected{% endif %}>Title (Descending)</option>
+                    <option value="status" {% if request.GET.sort_by == "status" %}selected{% endif %}>Status (Ascending)</option>
+                    <option value="-status" {% if request.GET.sort_by == "-status" %}selected{% endif %}>Status (Descending)</option>
+                    <option value="priority__name" {% if request.GET.sort_by == "priority__name" %}selected{% endif %}>Priority (Ascending)</option>
+                    <option value="-priority__name" {% if request.GET.sort_by == "-priority__name" %}selected{% endif %}>Priority (Descending)</option>
+                    <option value="category__name" {% if request.GET.sort_by == "category__name" %}selected{% endif %}>Category (Ascending)</option>
+                    <option value="-category__name" {% if request.GET.sort_by == "-category__name" %}selected{% endif %}>Category (Descending)</option>
+                    <option value="deadline" {% if request.GET.sort_by == "deadline" %}selected{% endif %}>Due Date (Ascending)</option>
+                    <option value="-deadline" {% if request.GET.sort_by == "-deadline" %}selected{% endif %}>Due Date (Descending)</option>
+                </select>
+
+                <button type="submit" class="btn btn-outline-primary btn-sm">Sort</button>
+            </div>
+
+        </div>
+
+    </form>
+
+    <div class="table-responsive-custom">
+        <table class="table table-hover mb-0">
+
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Priority</th>
+                    <th>Category</th>
+                    <th>Due Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+            {% for object in object_list %}
+            <tr>
+
+                <td class="text-truncate" style="max-width:150px;">{{ object.title }}</td>
+
+                <td>
+                    <span class="badge rounded-pill
+                        {% if object.status == 'Pending' %}status-pending
+                        {% elif object.status == 'In Progress ' %}status-ongoing
+                        {% elif object.status == 'Completed' %}status-completed
+                        {% endif %}" style="font-size:0.7rem;">
+                        {{ object.status }}
+                    </span>
+                </td>
+
+                <td>
+                    <span class="badge
+                        {% if object.priority.name == 'Low' %}status-completed
+                        {% elif object.priority.name == 'Medium' %}status-ongoing
+                        {% elif object.priority.name == 'High' %}status-pending
+                        {% elif object.priority.name == 'Optional' %}priority-optional
+                        {% elif object.priority.name == 'Critical' %}priority-critical
+                        {% endif %}" style="font-size:0.7rem;">
+                        {{ object.priority }}
+                    </span>
+                </td>
+
+                <td>
+                    <span class="badge fw-bold text-white
+                        {% if object.category.name == 'School' %}category-bg-purple
+                        {% elif object.category.name == 'Projects' %}category-bg-red
+                        {% elif object.category.name == 'Personal' %}category-bg-pink
+                        {% elif object.category.name == 'Work' %}category-bg-darkPurple
+                        {% elif object.category.name == 'Finance' %}category-bg-green
+                        {% endif %}">
+                        {{ object.category }}
+                    </span>
+                </td>
+
+                <td class="text-nowrap">{{ object.deadline }}</td>
+
+                <td class="text-nowrap">
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'taskDetails' object.pk %}" class="btn btn-sm btn-outline-info">
+                            <i class="bi bi-eye"></i>
+                        </a>
+                        <a href="{% url 'taskUpdate' object.pk %}" class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a href="{% url 'taskDelete' object.pk %}" class="btn btn-sm btn-outline-danger">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </div>
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="6" class="text-center text-muted py-4">No tasks found.</td>
+            </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+{% include 'includes/pagination.html' %}
+
 </div>
 {% endblock %}
