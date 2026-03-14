@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% if object %}Edit Notes{% else %}Create Notes{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row h-100">
+        <div class="col-12 scroll-column p-3">
+            <div class="card shadow-sm border-primary">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">{% if object %}Edit Notes{% else %}Create Notes{% endif %}</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="form-label">Parent Task</div>
+                                <input type="text" class="form-control" value="{% if object %}{{ object.parent_task.title }}{% else %}{{ parent_task.title }}{% endif %}" readonly>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-label">Parent ID</div>
+                                <input type="text" class="form-control" name="task" value="{% if object %}{{ object.parent_task.pk }}{% else %}{{ parent_task.pk }}{% endif %}" readonly>
+                            </div>
+
+                            <div class="col-12">
+                                <label class="form-label">Content</label>
+                                {{ form.content }}
+                            </div>
+                        </div>
+                        <div class="mt-4 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-success px-4">
+                                Save Task
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

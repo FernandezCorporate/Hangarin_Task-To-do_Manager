@@ -224,3 +224,16 @@ class SubTaskDeleteView(DeleteView):
         context = super().get_context_data(**kwargs)
         context["model"] = "subtask"
         return context
+
+class NoteCreateView(CreateView):
+    model = Note
+    form_class = NoteForm
+    template_name = 'noteForm.html'
+
+    def get_success_url(self):
+        return reverse_lazy('taskDetails', kwargs={'pk': self.object.task.pk})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['parent_task'] = Task.objects.get(id=self.kwargs['pk'])
+        return context
