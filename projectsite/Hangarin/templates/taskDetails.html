@@ -56,7 +56,7 @@
 
             <div class="card border-primary mt-4">
                 <div class="card-header bg-primary d-flex justify-content-between">
-                    <span class="fw-bold text-white fs-5">Subtasks</span>
+                    <span class="fw-bold text-white fs-5">Subtasks ({{ allSubtask }}) | <span class="fw-bold">Progress: </span>{{ progress }}</span>
                     <a href="{% url 'subtaskCreate' taskDetails.pk %}">
                         <div class="btn btn-success">Add Subtask</div>
                     </a>
@@ -89,7 +89,7 @@
         <div class="col-12 col-lg-4">
             <div class="card border-primary">
                 <div class="card-header bg-primary d-flex justify-content-between">
-                    <span class="fw-bold text-white fs-5">Notes</span>
+                    <span class="fw-bold text-white fs-5">Notes ({{ allNote }})</span>
                     <a href="{% url 'noteCreate' taskDetails.pk %}">
                         <div class="btn btn-success">Add Note</div>
                     </a>

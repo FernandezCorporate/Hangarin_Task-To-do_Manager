@@ -124,6 +124,7 @@ class TaskListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["All_tasks"] = self.get_queryset().count()
 
         context["model"] = "Tasks"
 
@@ -180,7 +181,18 @@ class TaskDetailListView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["details_active"] = True
+
+        completedSubTask = SubTask.objects.filter(status="Completed", parent_task_id=self.kwargs['pk']).count()
+        allSubtask = SubTask.objects.filter(parent_task_id=self.kwargs['pk']).count()
+
+        if allSubtask > 0:
+            subTaskProgress = int((completedSubTask/allSubtask) * 100)
+            context["progress"] = f"{subTaskProgress}%"   
+        else:
+                context["progress"] = "N/A"
+        context["allSubtask"] = allSubtask
+        context["allNote"] = Note.objects.filter(task=self.object).count()
+
         
         return context
 
