@@ -165,8 +165,13 @@ class TaskUpdateView(UpdateWithInlinesView):
 
 class TaskDeleteView(DeleteView):
     model = Task
-    template_name = 'taskConfirmDelete.html'
+    template_name = 'confirmDelete.html'
     success_url = reverse_lazy('taskList')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["model"] = "task"
+        return context
 
 class TaskDetailListView(DetailView):
     model = Task
@@ -206,4 +211,16 @@ class SubTaskUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['parent_task'] = self.object.parent_task
+        return context
+
+class SubTaskDeleteView(DeleteView):
+    model = SubTask
+    template_name = 'confirmDelete.html'
+
+    def get_success_url(self):
+        return reverse_lazy('taskDetails', kwargs={'pk': self.object.parent_task.pk})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["model"] = "subtask"
         return context
