@@ -90,12 +90,12 @@
                                     {% endif %}" style="font-size: 0.7rem;">
                                 {{ object.priority }}
                             </span></td>
-                            <td><span class="fw-bold
-                                    {% if object.category.name == 'School' %}category-purple
-                                    {% elif object.category.name == 'Projects' %}category-red
-                                    {% elif object.category.name == 'Personal' %}category-pink
-                                    {% elif object.category.name == 'Work' %}category-darkPurple
-                                    {% elif object.category.name == 'Finance' %}category-green
+                            <td><span class="badge fw-bold text-white
+                                    {% if object.category.name == 'School' %}category-bg-purple
+                                    {% elif object.category.name == 'Projects' %}category-bg-red
+                                    {% elif object.category.name == 'Personal' %}category-bg-pink
+                                    {% elif object.category.name == 'Work' %}category-bg-darkPurple
+                                    {% elif object.category.name == 'Finance' %}category-bg-green
                                     {% endif %}">
                             {{ object.category }}</span></td>
                             <td class="text-nowrap">{{ object.deadline }}</td>

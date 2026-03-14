@@ -157,12 +157,22 @@ class TaskCreateView(CreateWithInlinesView):
     success_url = reverse_lazy('taskList')
     inlines = [SubTaskInline, NoteInline]
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["model"] = "Add Task"
+        return context
+
 class TaskUpdateView(UpdateWithInlinesView):
     model = Task
     template_name = 'taskForm.html'
     form_class = TaskForm
     success_url = reverse_lazy('taskList')
     inlines = [SubTaskUpdateInline, NoteUpdateInline]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["model"] = "Update Task"
+        return context
 
 class TaskDeleteView(DeleteView):
     model = Task
@@ -171,7 +181,7 @@ class TaskDeleteView(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["model"] = "task"
+        context["model"] = "Delete Task"
         return context
 
 class TaskDetailListView(DetailView):
@@ -193,6 +203,9 @@ class TaskDetailListView(DetailView):
         context["allSubtask"] = allSubtask
         context["allNote"] = Note.objects.filter(task=self.object).count()
 
+        context["details_active"] =True
+        context["model"] = "Task Details"
+
         
         return context
 
@@ -210,6 +223,7 @@ class SubTaskCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['parent_task'] = Task.objects.get(id=self.kwargs['pk'])
+        context["model"] = "Add SubTask"
         return context
     
 class SubTaskUpdateView(UpdateView):
@@ -223,6 +237,7 @@ class SubTaskUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['parent_task'] = self.object.parent_task
+        context["model"] = "Update SubTask"
         return context
 
 class SubTaskDeleteView(DeleteView):
@@ -234,7 +249,7 @@ class SubTaskDeleteView(DeleteView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["model"] = "subtask"
+        context["model"] = "Delete SubTask"
         return context
 
 class NoteCreateView(CreateView):
@@ -248,6 +263,7 @@ class NoteCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['parent_task'] = Task.objects.get(id=self.kwargs['pk'])
+        context["model"] = "Add Note"
         return context
 
 class NoteUpdateView(UpdateView):
@@ -261,6 +277,7 @@ class NoteUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['parent_task'] = self.object.task
+        context["model"] = "Update Note"
         return context
 
 class NoteDeleteView(DeleteView):
@@ -272,5 +289,5 @@ class NoteDeleteView(DeleteView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["model"] = "note"
+        context["model"] = "Delete note"
         return context
