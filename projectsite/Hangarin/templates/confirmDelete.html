@@ -10,7 +10,7 @@
             <h5 class="mb-0">Confirm Delete</h5>
         </div>
         <div class="card-body">
-            <p class="mb-4">Are you sure you want to delete the {{ model }} "<strong>{{ object.title }}</strong>"?</p>
+            <p class="mb-4">Are you sure you want to delete the {{ model }} "<strong>{{ object }}</strong>"?</p>
             <form method="POST">
                 {% csrf_token %}
                 <a href="{% url 'taskList' %}" class="btn btn-secondary">Cancel</a>

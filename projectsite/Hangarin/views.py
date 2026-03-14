@@ -250,3 +250,15 @@ class NoteUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context['parent_task'] = self.object.task
         return context
+
+class NoteDeleteView(DeleteView):
+    model = Note
+    template_name = 'confirmDelete.html'
+
+    def get_success_url(self):
+        return reverse_lazy('taskDetails', kwargs={'pk': self.object.task.pk})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["model"] = "note"
+        return context
