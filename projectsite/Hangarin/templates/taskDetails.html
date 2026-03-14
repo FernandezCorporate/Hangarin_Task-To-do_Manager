@@ -73,7 +73,7 @@
                                 {% elif subtask.status == 'In Progress ' %}status-ongoing
                                 {% elif subtask.status == 'Completed' %}status-completed
                                 {% endif %}" style="font-size: 0.7rem;">{{ subtask.status }}</span>
-                            <a href="#" class="btn btn-sm btn-outline-primary" title="Edit">
+                            <a href="{% url 'subtaskUpdate' taskDetails.pk subtask.pk %}" class="btn btn-sm btn-outline-primary" title="Edit">
                                 <i class="bi bi-pencil"></i>
                             </a>
                             <a href="#" class="btn btn-sm btn-outline-danger" title="Delete">

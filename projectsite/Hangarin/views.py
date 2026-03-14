@@ -182,7 +182,7 @@ class TaskDetailListView(DetailView):
     def get_queryset(self):
         return Task.objects.prefetch_related('subtask_set', 'note_set').all()
 
-class SubTaskFormView(CreateView):
+class SubTaskCreateView(CreateView):
     model = SubTask
     form_class = SubTaskForm
     template_name = 'subtaskForm.html'
@@ -193,4 +193,17 @@ class SubTaskFormView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['parent_task'] = Task.objects.get(id=self.kwargs['pk'])
+        return context
+    
+class SubTaskUpdateView(UpdateView):
+    model = SubTask
+    form_class = SubTaskForm
+    template_name = 'subtaskForm.html'
+
+    def get_success_url(self):
+        return reverse_lazy('taskDetails', kwargs={'pk': self.object.parent_task.pk})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['parent_task'] = self.object.parent_task
         return context
