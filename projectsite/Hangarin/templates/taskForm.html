@@ -2,10 +2,11 @@
 {% load static %}
 
 {% block title %}
-    {% if object %}Edit Task{% else %}Create Task{% endif %}
+{% if object %}Edit Task{% else %}Create Task{% endif %}
 {% endblock %}
 
 {% block content %}
+
 <div class="container-fluid">
     <div class="row h-100">
         <div class="col-12 scroll-column p-3">
@@ -21,6 +22,7 @@
                                 <label class="form-label">Title</label>
                                 {{ form.title }}
                             </div>
+
                             <div class="col-12">
                                 <label class="form-label">Description</label>
                                 {{ form.description }}
@@ -47,49 +49,59 @@
                             </div>
                         </div>
                         <hr class="my-4">
-                        <h5 class="mb-3">Subtasks</h5>
-
                         {% for formset in inlines %}
+                            {% if formset.prefix == "subtask_set" %}
+                                <h5 class="mb-3">Subtasks</h5>
+                            {% else %}
+                                <h5 class="mb-3">Notes</h5>
+                            {% endif %}
+
                             {{ formset.management_form }}
                             {{ formset.non_form_errors }}
 
                             <div class="row g-3">
+
                                 {% for inline_form in formset %}
-                                    <div class="col-12 border rounded p-3 mb-3 bg-light">
-                                        {{ inline_form.id }}
-                                        {% for hidden in inline_form.hidden_fields %}
-                                            {{ hidden }}
-                                        {% endfor %}
+                                <div class="col-12 border rounded p-3 mb-3 bg-light">
+
+                                    {% for hidden in inline_form.hidden_fields %}
+                                        {{ hidden }}
+                                    {% endfor %}
+
+                                    {% if formset.prefix == "subtask_set" %}
 
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <label class="form-label">{{ inline_form.title.label }}</label>
                                                 {{ inline_form.title }}
-                                                {{ inline_form.title.errors }}
                                             </div>
 
                                             <div class="col-md-4">
                                                 <label class="form-label">{{ inline_form.status.label }}</label>
                                                 {{ inline_form.status }}
-                                                {{ inline_form.status.errors }}
                                             </div>
                                         </div>
 
-                                        {% if formset.can_delete and inline_form.instance.pk %}
-                                            <div class="form-check mt-2">
-                                                {{ inline_form.DELETE }}
-                                                <label class="form-check-label text-danger">Delete Subtask</label>
-                                            </div>
-                                        {% endif %}
-                                    </div>
+                                    {% else %}
+
+                                        <label class="form-label">{{ inline_form.content.label }}</label>
+                                        {{ inline_form.content }}
+
+                                    {% endif %}
+
+                                </div>
                                 {% endfor %}
+
                             </div>
+
+                            <hr class="my-4">
                         {% endfor %}
                         <div class="mt-4 d-flex justify-content-end">
                             <button type="submit" class="btn btn-success px-4">
                                 Save Task
                             </button>
                         </div>
+
                     </form>
                 </div>
             </div>

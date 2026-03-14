@@ -4,7 +4,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from Hangarin.models import Task, SubTask, Note
 from django.db.models import F
-from Hangarin.forms import TaskForm, SubTaskForm
+from Hangarin.forms import TaskForm, SubTaskForm, NoteForm
 from django.urls import reverse_lazy
 from extra_views import CreateWithInlinesView, InlineFormSetFactory, UpdateWithInlinesView
 
@@ -132,11 +132,21 @@ class TaskListView(ListView):
 class SubTaskInline(InlineFormSetFactory):
     model = SubTask
     form_class = SubTaskForm
-    factory_kwargs = {'extra': 3, 'max_num': 5, 'can_delete': False} 
+    factory_kwargs = {'extra': 3, 'can_delete': False} 
+
+class NoteInline(InlineFormSetFactory):
+    model = Note
+    form_class = NoteForm
+    factory_kwargs = {'extra': 2, 'can_delete': False}
 
 class SubTaskUpdateInline(InlineFormSetFactory):
     model = SubTask
     form_class = SubTaskForm
+    factory_kwargs = {'extra': 0, 'can_delete': False}
+
+class NoteUpdateInline(InlineFormSetFactory):
+    model = Note
+    form_class = NoteForm
     factory_kwargs = {'extra': 0, 'can_delete': False}
 
 class TaskCreateView(CreateWithInlinesView):
@@ -144,14 +154,14 @@ class TaskCreateView(CreateWithInlinesView):
     template_name = 'taskForm.html'
     form_class = TaskForm
     success_url = reverse_lazy('taskList')
-    inlines = [SubTaskInline]
+    inlines = [SubTaskInline, NoteInline]
 
 class TaskUpdateView(UpdateWithInlinesView):
     model = Task
     template_name = 'taskForm.html'
     form_class = TaskForm
     success_url = reverse_lazy('taskList')
-    inlines = [SubTaskUpdateInline]
+    inlines = [SubTaskUpdateInline, NoteUpdateInline]
 
 class TaskDeleteView(DeleteView):
     model = Task

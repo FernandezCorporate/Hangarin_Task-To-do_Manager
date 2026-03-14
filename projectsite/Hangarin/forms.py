@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django import forms
-from .models import Task, SubTask
+from .models import Task, SubTask, Note
 
 class TaskForm(ModelForm):
     class Meta:
@@ -49,5 +49,17 @@ class SubTaskForm(ModelForm):
 
             'status': forms.Select(attrs={
                 'class': 'form-select border border-primary'
+            })
+        }
+
+class NoteForm(ModelForm):
+    class Meta:
+        model = Note
+        fields = ['content']
+        widgets = {
+            'content': forms.Textarea(attrs={
+                'class': 'form-control border border-primary',
+                'rows': 3,
+                'placeholder': 'Add a note'
             })
         }
