@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Hangarin.views import DashBoardListView, TaskListView, TaskCreateView,TaskUpdateView, TaskDeleteView, TaskDetailListView
+from Hangarin.views import DashBoardListView, TaskListView, TaskCreateView,TaskUpdateView, TaskDeleteView, TaskDetailListView, SubTaskFormView
 from Hangarin import views
 
 urlpatterns = [
@@ -27,4 +27,5 @@ urlpatterns = [
     path('taskUpdate/<int:pk>', TaskUpdateView.as_view(), name='taskUpdate'),
     path('taskDelete/<int:pk>', TaskDeleteView.as_view(), name='taskDelete'),
     path('taskDetails/<int:pk>', TaskDetailListView.as_view(), name='taskDetails'),
+    path('taskDetails/<int:pk>/subtaskCreate', SubTaskFormView.as_view(), name='subtaskCreate'),
 ]

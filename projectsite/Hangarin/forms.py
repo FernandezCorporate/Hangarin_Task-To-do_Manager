@@ -40,7 +40,7 @@ class TaskForm(ModelForm):
 class SubTaskForm(ModelForm):
     class Meta:
         model = SubTask
-        fields = ['title', 'status']
+        fields = "__all__"
         widgets = {
             'title': forms.TextInput(attrs={
                 'class': 'form-control border border-primary',
@@ -55,7 +55,7 @@ class SubTaskForm(ModelForm):
 class NoteForm(ModelForm):
     class Meta:
         model = Note
-        fields = ['content']
+        fields = "__all__"
         widgets = {
             'content': forms.Textarea(attrs={
                 'class': 'form-control border border-primary',
