@@ -53,12 +53,12 @@
           <ul class="nav flex-column w-100 vh-100 d-flex">
             <div class="mb-4"> 
               <span class="text-muted small fw-bold">OVERVIEW</span>
-              <li class="nav-item"><a class="nav-link" href="/">Dashboard</a></li>
+              <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="/">Dashboard</a></li>
             </div>
             <div class="mb-4">
               <span class="text-muted small fw-bold">TASK</span>
-              <li class="nav-item"><a class="nav-link" href="{% url 'taskList' %}">Task List</a></li>
-              <li class="nav-item"><a class="nav-link" href="{% url 'taskCreate' %}">Add Task</a></li>
+              <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'taskList' %}active{% endif %}" href="{% url 'taskList' %}">Task List</a></li>
+              <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'taskCreate' %}active{% endif %}" href="{% url 'taskCreate' %}">Add Task</a></li>
             </div>
             <div>
               <span class="text-muted small fw-bold">MANAGE</span>
