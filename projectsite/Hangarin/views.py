@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from Hangarin.models import Task, SubTask, Note, Category
+from Hangarin.models import Task, SubTask, Note, Category, Priority
 from django.db.models import F, Count, Q
 from Hangarin.forms import TaskForm, SubTaskForm, NoteForm
 from django.urls import reverse_lazy
@@ -314,7 +314,7 @@ class NoteDeleteView(DeleteView):
     
 class CategoryListView(ListView):
     model = Category
-    template_name = "categoryList.html"
+    template_name = "classification.html"
     context_object_name = "category"
 
     def get_queryset(self):
@@ -328,5 +328,24 @@ class CategoryListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["model"] = "Categories"
+
+        return context
+    
+class PriorityListView(ListView):
+    model = Priority
+    template_name = "classification.html"
+    context_object_name = "priority"
+
+    def get_queryset(self):
+        return Priority.objects.annotate(
+            total_tasks=Count('task'),
+            completed_tasks=Count('task', filter=Q(task__status='Completed')),
+            pending_tasks=Count('task', filter=Q(task__status='Pending')),
+            inProgress_tasks=Count('task', filter=Q(task__status='In Progress '))
+            )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["model"] = "Priorities"
 
         return context

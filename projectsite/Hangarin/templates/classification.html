@@ -14,10 +14,10 @@
                     <thead class="fw-bold">
                         <tr>
                             <td>Name</td>
-                            <td>Total Tasks</td>
-                            <td>Pending</td>
-                            <td>In Progress</td>
-                            <td>Completed</td>
+                            <td class="text-info">Total Tasks</td>
+                            <td class="text-warning">Pending</td>
+                            <td class="text-primary">In Progress</td>
+                            <td class="text-success">Completed</td>
                         </tr>
                     </thead>
                         {% for object in object_list %}
@@ -29,6 +29,11 @@
                                         {% elif object.name == 'Personal' %}category-bg-pink
                                         {% elif object.name == 'Work' %}category-bg-darkPurple
                                         {% elif object.name == 'Finance' %}category-bg-green
+                                        {% elif object.name == 'Low' %}bg-success
+                                        {% elif object.name == 'Medium' %}bg-primary
+                                        {% elif object.name == 'High' %}bg-warning
+                                        {% elif object.name == 'Optional' %}bg-secondary
+                                        {% elif object.name == 'Critical' %}bg-danger
                                         {% endif %}">
                                         {{ object.name }}
                                     </span>

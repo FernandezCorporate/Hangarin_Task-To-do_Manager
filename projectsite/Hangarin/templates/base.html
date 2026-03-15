@@ -21,11 +21,7 @@
 
         <div class="d-flex align-items-center gap-3">
           <span class="text-white">{{ model }}</span>
-          {% if model == "Categories" %}
-            <a href="">
-              <button class="btn btn-success">Add Categories</button>
-            </a>
-          {% else %}
+          {% if model != "Categories" and model != "Add Task" %}
             <a href="{% url 'taskCreate' %}">
               <button class="btn btn-success">Add Task</button>
             </a>
@@ -68,8 +64,8 @@
             </div>
             <div>
               <span class="text-muted small fw-bold">MANAGE</span>
-              <li class="nav-item"><a class="nav-link" href="{% url 'categoryList' %}">Category</a></li>
-              <li class="nav-item"><a class="nav-link" href="">Priority</a></li>
+              <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'categoryList' %}active{% endif %}" href="{% url 'categoryList' %}">Category</a></li>
+              <li class="nav-item"><a class="nav-link {% if request.resolver_match.url_name == 'priorityList' %}active{% endif %}" href="{% url 'priorityList' %}">Priority</a></li>
             </div>
             <div class="mt-auto border-top bg-white w-100">
               <div class="dropup p-3">
