@@ -21,9 +21,15 @@
 
         <div class="d-flex align-items-center gap-3">
           <span class="text-white">{{ model }}</span>
-          <a href="{% url 'taskCreate' %}">
-            <button class="btn btn-success">Add Task</button>
-          </a>
+          {% if model == "Categories" %}
+            <a href="">
+              <button class="btn btn-success">Add Categories</button>
+            </a>
+          {% else %}
+            <a href="{% url 'taskCreate' %}">
+              <button class="btn btn-success">Add Task</button>
+            </a>
+          {% endif %}
           {% if details_active %}
             <a href="{% url 'taskUpdate' taskDetails.pk %}">
               <button class="btn btn-primary">Edit</button>
@@ -62,7 +68,7 @@
             </div>
             <div>
               <span class="text-muted small fw-bold">MANAGE</span>
-              <li class="nav-item"><a class="nav-link" href="">Category</a></li>
+              <li class="nav-item"><a class="nav-link" href="{% url 'categoryList' %}">Category</a></li>
               <li class="nav-item"><a class="nav-link" href="">Priority</a></li>
             </div>
             <div class="mt-auto border-top bg-white w-100">

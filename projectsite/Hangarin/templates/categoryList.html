@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Category{% endblock %}
+{% block content %}
+<div class="container-fluid py-3">
+    <div class="card p-3 mt-4 shadow-sm border-primary">
+        <div class="row align-items-center mb-3">
+            <div class="col-12 mb-3">
+                <h5 class="fw-bold mb-0">Categories</h5>
+            </div>
+            <div class="table-responsive-custom">
+                <table class="table table-hover mb-0">
+                    <thead class="fw-bold">
+                        <tr>
+                            <td>Name</td>
+                            <td>Total Tasks</td>
+                            <td>Pending</td>
+                            <td>In Progress</td>
+                            <td>Completed</td>
+                        </tr>
+                    </thead>
+                        {% for object in object_list %}
+                            <tr>
+                                <td>
+                                    <span class="badge fw-bold text-white
+                                        {% if object.name == 'School' %}category-bg-purple
+                                        {% elif object.name == 'Projects' %}category-bg-red
+                                        {% elif object.name == 'Personal' %}category-bg-pink
+                                        {% elif object.name == 'Work' %}category-bg-darkPurple
+                                        {% elif object.name == 'Finance' %}category-bg-green
+                                        {% endif %}">
+                                        {{ object.name }}
+                                    </span>
+                                </td>
+                                <td>{{ object.total_tasks }}</td>
+                                <td>{{ object.completed_tasks }}</td>
+                                <td>{{ object.inProgress_tasks }}</td>
+                                <td>{{ object.pending_tasks }}</td>
+                            </tr>
+                        {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

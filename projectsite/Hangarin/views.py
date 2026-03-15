@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.views.generic import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from Hangarin.models import Task, SubTask, Note
-from django.db.models import F
+from Hangarin.models import Task, SubTask, Note, Category
+from django.db.models import F, Count, Q
 from Hangarin.forms import TaskForm, SubTaskForm, NoteForm
 from django.urls import reverse_lazy
 from extra_views import CreateWithInlinesView, InlineFormSetFactory, UpdateWithInlinesView
@@ -310,4 +310,23 @@ class NoteDeleteView(DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["model"] = "Delete note"
+        return context
+    
+class CategoryListView(ListView):
+    model = Category
+    template_name = "categoryList.html"
+    context_object_name = "category"
+
+    def get_queryset(self):
+        return Category.objects.annotate(
+            total_tasks=Count('task'),
+            completed_tasks=Count('task', filter=Q(task__status='Completed')),
+            pending_tasks=Count('task', filter=Q(task__status='Pending')),
+            inProgress_tasks=Count('task', filter=Q(task__status='In Progress '))
+            )
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["model"] = "Categories"
+
         return context
