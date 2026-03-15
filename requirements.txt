@@ -1,0 +1,7 @@
+asgiref==3.11.1
+Django==5.2.12
+django-extra-views==0.16.0
+django-widget-tweaks==1.5.1
+Faker==40.8.0
+sqlparse==0.5.5
+tzdata==2025.3
