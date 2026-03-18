@@ -57,28 +57,40 @@
             <div class="card border-primary mt-4">
                 <div class="card-header bg-primary d-flex justify-content-between">
                     <span class="fw-bold text-white fs-5">Subtasks ({{ allSubtask }}) | <span class="fw-bold">Progress: </span>{{ progress }}</span>
-                    <a href="{% url 'subtaskCreate' taskDetails.pk %}">
-                        <div class="btn btn-success">Add Subtask</div>
+                    <a href="{% url 'subtaskCreate' taskDetails.pk %}" 
+                    class="btn btn-success btn-sm d-flex align-items-center gap-2 px-3">
+                        <i class="bi bi-plus-lg"></i>
+                        <span class="d-none d-sm-inline">Add Subtask</span>
                     </a>
                 </div>
                 <div class="card-body overflow-auto" style="max-height: 40vh;">
                     {% for subtask in taskDetails.subtask_set.all %}
-                    <div class="d-flex align-items-center justify-content-between mb-3 p-3 border border-primary rounded">
-                        <div>
-                            <span class="fw-bold">{{ subtask.title }}</span>
+                    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mb-2 mb-sm-3 p-2 p-sm-3 border border-primary rounded">
+
+                        <div class="fw-semibold text-break small small-sm-normal mb-1 mb-sm-0">
+                            {{ subtask.title }}
                         </div>
-                        <div>
-                            <span class="badge rounded-pill
+
+                        <div class="d-flex align-items-center flex-wrap gap-1">
+
+                            <span class="badge rounded-pill px-2 py-1
                                 {% if subtask.status == 'Pending' %}status-pending
                                 {% elif subtask.status == 'In Progress ' %}status-ongoing
                                 {% elif subtask.status == 'Completed' %}status-completed
-                                {% endif %}" style="font-size: 0.7rem;">{{ subtask.status }}</span>
-                            <a href="{% url 'subtaskUpdate' taskDetails.pk subtask.pk %}" class="btn btn-sm btn-outline-primary" title="Edit">
+                                {% endif %}">
+                                {{ subtask.status }}
+                            </span>
+
+                            <a href="{% url 'subtaskUpdate' taskDetails.pk subtask.pk %}" 
+                            class="btn btn-outline-primary btn-sm d-flex align-items-center justify-content-center">
                                 <i class="bi bi-pencil"></i>
                             </a>
-                            <a href="{% url 'subtaskDelete' taskDetails.pk subtask.pk %}" class="btn btn-sm btn-outline-danger" title="Delete">
+
+                            <a href="{% url 'subtaskDelete' taskDetails.pk subtask.pk %}" 
+                            class="btn btn-outline-danger btn-sm d-flex align-items-center justify-content-center">
                                 <i class="bi bi-trash"></i>
                             </a>
+
                         </div>
                     </div>
                     {% endfor %}
@@ -87,31 +99,45 @@
         </div>
 
         <div class="col-12 col-lg-4">
-            <div class="card border-primary">
+            <div class="card border-primary mt-4">
                 <div class="card-header bg-primary d-flex justify-content-between">
                     <span class="fw-bold text-white fs-5">Notes ({{ allNote }})</span>
-                    <a href="{% url 'noteCreate' taskDetails.pk %}">
-                        <div class="btn btn-success">Add Note</div>
+                    <a href="{% url 'noteCreate' taskDetails.pk %}" 
+                    class="btn btn-success btn-sm d-flex align-items-center gap-2 px-3">
+                        <i class="bi bi-plus-lg"></i>
+                        <span class="d-none d-sm-inline">Add Notes</span>
                     </a>
                 </div>
                 <div class="card-body overflow-auto" style="max-height: 40vh;">
                     {% for note in taskDetails.note_set.all %}
-                        <div class="card p-3 mb-2">
-                            <div class="card-body p-0 border-primary">
-                                <div>{{ note.content }}</div>
-                                <div class="d-flex justify-content-between align-items-end">
-                                    <div class="text-muted small">{{ note.created_at|date:"M d, Y" }}</div>
-                                    <div class="d-flex gap-2">
-                                        <a href="{% url 'noteUpdate' taskDetails.pk note.pk %}" class="btn btn-sm btn-outline-primary" title="Edit">
-                                            <i class="bi bi-pencil"></i>
-                                        </a>
-                                        <a href="{% url 'noteDelete' taskDetails.pk note.pk %}" class="btn btn-sm btn-outline-danger" title="Delete">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </div>
+                    <div class="card p-2 p-sm-3 mb-2">
+                        <div class="card-body p-0">
+
+                            <div class="small small-sm-normal text-break">
+                                {{ note.content }}
+                            </div>
+
+                            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center mt-2 gap-1">
+
+                                <div class="text-muted small">
+                                    {{ note.created_at|date:"M d, Y" }}
                                 </div>
+
+                                <div class="d-flex gap-1">
+                                    <a href="{% url 'noteUpdate' taskDetails.pk note.pk %}" 
+                                    class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+
+                                    <a href="{% url 'noteDelete' taskDetails.pk note.pk %}" 
+                                    class="btn btn-outline-danger btn-sm">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+
                             </div>
                         </div>
+                    </div>
                     {% endfor %}
                 </div>
             </div>

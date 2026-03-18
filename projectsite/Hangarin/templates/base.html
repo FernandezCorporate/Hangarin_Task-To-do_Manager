@@ -21,17 +21,19 @@
 
         <div class="d-flex align-items-center gap-3">
           <span class="text-white">{{ model }}</span>
-          {% if model != "Categories" and model != "Add Task" %}
-            <a href="{% url 'taskCreate' %}">
-              <button class="btn btn-success">Add Task</button>
-            </a>
+          {% if model != "Categories" and model != "Add Task" and model != "Priorities" and model != "Task Details" %}
+          <a href="{% url 'taskCreate' %}" 
+            class="btn btn-success btn-sm d-flex align-items-center gap-2 px-3">
+              <i class="bi bi-plus-lg"></i>
+              <span class="d-none d-sm-inline">Add Task</span>
+          </a>
           {% endif %}
           {% if details_active %}
-            <a href="{% url 'taskUpdate' taskDetails.pk %}">
-              <button class="btn btn-primary">Edit</button>
+            <a href="{% url 'taskUpdate' taskDetails.pk %}" class="btn btn-sm btn-primary">
+              <i class="bi bi-pencil"></i>
             </a>
-            <a href="{% url 'taskDelete' taskDetails.pk %}">
-              <button class="btn btn-danger">Delete</button>
+            <a href="{% url 'taskDelete' taskDetails.pk %}" class="btn btn-sm btn-danger">
+              <i class="bi bi-trash"></i>
             </a>
           {% endif %}
         </div>
