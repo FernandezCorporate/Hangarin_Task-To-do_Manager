@@ -7,8 +7,9 @@ from django.db.models import F, Count, Q
 from Hangarin.forms import TaskForm, SubTaskForm, NoteForm
 from django.urls import reverse_lazy
 from extra_views import CreateWithInlinesView, InlineFormSetFactory, UpdateWithInlinesView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class DashBoardListView(ListView):
+class DashBoardListView(LoginRequiredMixin, ListView):
     model = Task
     template_name = "dashboard.html"
     context_object_name = "dashboard"
@@ -94,7 +95,7 @@ class DashBoardListView(ListView):
 
         return context
     
-class TaskListView(ListView):
+class TaskListView(LoginRequiredMixin, ListView):
     model = Task
     template_name = 'taskList.html'
     context_object_name = 'taskList'
@@ -170,7 +171,7 @@ class NoteUpdateInline(InlineFormSetFactory):
     form_class = NoteForm
     factory_kwargs = {'extra': 0, 'can_delete': False}
 
-class TaskCreateView(CreateWithInlinesView):
+class TaskCreateView(LoginRequiredMixin, CreateWithInlinesView):
     model = Task
     template_name = 'taskForm.html'
     form_class = TaskForm
@@ -182,7 +183,7 @@ class TaskCreateView(CreateWithInlinesView):
         context["model"] = "Add Task"
         return context
 
-class TaskUpdateView(UpdateWithInlinesView):
+class TaskUpdateView(LoginRequiredMixin, UpdateWithInlinesView):
     model = Task
     template_name = 'taskForm.html'
     form_class = TaskForm
@@ -194,7 +195,7 @@ class TaskUpdateView(UpdateWithInlinesView):
         context["model"] = "Update Task"
         return context
 
-class TaskDeleteView(DeleteView):
+class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     template_name = 'confirmDelete.html'
     success_url = reverse_lazy('taskList')
@@ -204,7 +205,7 @@ class TaskDeleteView(DeleteView):
         context["model"] = "Delete Task"
         return context
 
-class TaskDetailListView(DetailView):
+class TaskDetailListView(LoginRequiredMixin, DetailView):
     model = Task
     template_name = 'taskDetails.html'
     context_object_name = 'taskDetails'
@@ -232,7 +233,7 @@ class TaskDetailListView(DetailView):
     def get_queryset(self):
         return Task.objects.prefetch_related('subtask_set', 'note_set').all()
 
-class SubTaskCreateView(CreateView):
+class SubTaskCreateView(LoginRequiredMixin, CreateView):
     model = SubTask
     form_class = SubTaskForm
     template_name = 'subtaskForm.html'
@@ -246,7 +247,7 @@ class SubTaskCreateView(CreateView):
         context["model"] = "Add SubTask"
         return context
     
-class SubTaskUpdateView(UpdateView):
+class SubTaskUpdateView(LoginRequiredMixin, UpdateView):
     model = SubTask
     form_class = SubTaskForm
     template_name = 'subtaskForm.html'
@@ -260,7 +261,7 @@ class SubTaskUpdateView(UpdateView):
         context["model"] = "Update SubTask"
         return context
 
-class SubTaskDeleteView(DeleteView):
+class SubTaskDeleteView(LoginRequiredMixin, DeleteView):
     model = SubTask
     template_name = 'confirmDelete.html'
 
@@ -272,7 +273,7 @@ class SubTaskDeleteView(DeleteView):
         context["model"] = "Delete SubTask"
         return context
 
-class NoteCreateView(CreateView):
+class NoteCreateView(LoginRequiredMixin, CreateView):
     model = Note
     form_class = NoteForm
     template_name = 'noteForm.html'
@@ -286,7 +287,7 @@ class NoteCreateView(CreateView):
         context["model"] = "Add Note"
         return context
 
-class NoteUpdateView(UpdateView):
+class NoteUpdateView(LoginRequiredMixin, UpdateView):
     model = Note
     form_class = NoteForm
     template_name = 'noteForm.html'
@@ -300,7 +301,7 @@ class NoteUpdateView(UpdateView):
         context["model"] = "Update Note"
         return context
 
-class NoteDeleteView(DeleteView):
+class NoteDeleteView(LoginRequiredMixin, DeleteView):
     model = Note
     template_name = 'confirmDelete.html'
 
@@ -312,7 +313,7 @@ class NoteDeleteView(DeleteView):
         context["model"] = "Delete note"
         return context
     
-class CategoryListView(ListView):
+class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
     template_name = "classification.html"
     context_object_name = "category"
@@ -331,7 +332,7 @@ class CategoryListView(ListView):
 
         return context
     
-class PriorityListView(ListView):
+class PriorityListView(LoginRequiredMixin, ListView):
     model = Priority
     template_name = "classification.html"
     context_object_name = "priority"

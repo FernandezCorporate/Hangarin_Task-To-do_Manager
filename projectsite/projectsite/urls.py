@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from Hangarin.views import DashBoardListView, TaskListView, TaskCreateView,TaskUpdateView, TaskDeleteView, TaskDetailListView, SubTaskCreateView, SubTaskUpdateView, SubTaskDeleteView, NoteCreateView, NoteUpdateView, NoteDeleteView, CategoryListView, PriorityListView
 from Hangarin import views
 
@@ -34,5 +34,6 @@ urlpatterns = [
     path('taskDetails/<int:parentTask_pk>/noteUpdate/<int:pk>', NoteUpdateView.as_view(), name='noteUpdate'),
     path('taskDetails/<int:parentTask_pk>/noteDelete/<int:pk>', NoteDeleteView.as_view(), name='noteDelete'),
     path('categoryList', CategoryListView.as_view(), name='categoryList'),
-    path('priorityList', PriorityListView.as_view(), name='priorityList')
+    path('priorityList', PriorityListView.as_view(), name='priorityList'),
+    path("accounts/", include("allauth.urls")),
 ]
