@@ -83,9 +83,9 @@ pip install -r requirements.txt
 
 ### 4️⃣ Apply Migrations
 
-cd projectsite
-python manage.py makemigrations
-python manage.py migrate
+cd projectsite  
+python manage.py makemigrations  
+python manage.py migrate  
 
 ### 5️⃣ Create Superuser
 
