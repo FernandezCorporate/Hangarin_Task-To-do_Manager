@@ -74,7 +74,7 @@ source bin/activate
 
 ### 2️⃣ Clone the Repository
 
-git clone https://github.com/FernandezCorporate/PSUSphere.git
+git clone https://github.com/FernandezCorporate/Hangarin_Task-To-do_Manager.git
 cd PSUSphere
 
 ### 3️⃣ Install Dependencies
