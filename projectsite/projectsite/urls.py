@@ -36,4 +36,5 @@ urlpatterns = [
     path('categoryList', CategoryListView.as_view(), name='categoryList'),
     path('priorityList', PriorityListView.as_view(), name='priorityList'),
     path("accounts/", include("allauth.urls")),
+    path('',include('pwa.urls')),
 ]
